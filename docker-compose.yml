@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  mysql_db:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./Dockerfiles
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: posts
+      # ports:
+      #   - "3306:3306"
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 55
+
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: ./api
+    depends_on:
+      mysql_db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  client:
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    volumes:
+      - ./public/upload:/public/upload
+    ports:
+      - "3000:3000"

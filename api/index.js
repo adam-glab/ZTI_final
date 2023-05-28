@@ -14,7 +14,7 @@ app.use(cookieParser());
 //app.use(cors({origin:"http://localhost:3000/", credentials:true}));
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../client/public/upload');
+    cb(null, './public/upload');
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -25,6 +25,8 @@ const upload = multer({ storage });
 
 app.post("/api/upload", upload.single("file"), function (req, res) {
   const file = req.file;
+  console.log('***current directory:' + process.cwd());
+  console.log('***file path:' + req.file.path);
   res.status(200).json(file.filename);
 });
 

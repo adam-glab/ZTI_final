@@ -6,9 +6,11 @@ RUN mkdir -p /usr/src/app/client
 
 WORKDIR /usr/src/app/client
 
+RUN chmod 755 .
+
 COPY package*.json ./
 RUN npm install
-RUN npm install -g yarn
+#RUN npm install -g yarn
 
 COPY . .
 

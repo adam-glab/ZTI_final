@@ -19,6 +19,8 @@ const Write = () => {
       const formData = new FormData();
       formData.append("file", file);
       const res = await axios.post("/upload", formData);
+      console.log('***current directory:' + process.cwd());
+      console.log('***file path:' + file.path);
       return res.data;
     } catch (err) {
       console.log(err);
