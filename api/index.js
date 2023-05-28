@@ -11,10 +11,11 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static('files'));
 //app.use(cors({origin:"http://localhost:3000/", credentials:true}));
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './public/upload');
+    cb(null, './files');
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);

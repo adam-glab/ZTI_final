@@ -25,6 +25,8 @@ services:
     depends_on:
       mysql_db:
         condition: service_healthy
+    volumes:
+      - ./files:/files
     ports:
       - "8000:8000"
 
@@ -33,7 +35,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./client
-    volumes:
-      - ./public/upload:/public/upload
+    # volumes:
+    #   - ./public/upload:/public/upload
     ports:
       - "3000:3000"
