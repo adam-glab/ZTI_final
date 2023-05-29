@@ -48,7 +48,7 @@ const Single = () => {
   return (
     <div className="single">
       <div className="content">
-        <img src={`http://api:8000/${post?.img}`} alt="" />
+        <img src={`http://localhost:8000/${post?.img}`} alt="" />
         <div className="user">
           <div className="info">
             <span>{post.username}</span>
