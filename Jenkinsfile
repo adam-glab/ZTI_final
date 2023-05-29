@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Prune'){
             steps{
-                sh 'docker compose down --remove-orphans -v'
+                sh 'docker compose down --remove-orphans'
                 sh 'docker compose ps'
                 sh 'docker system prune -a'
             }
