@@ -22,6 +22,7 @@ const storage = multer.diskStorage({
   },
 });
 
+console.log('***current directory:' + process.cwd());
 const upload = multer({ storage });
 
 app.post("/api/upload", upload.single("file"), function (req, res) {
