@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 const Menu = ({ cat }) => {
   const [posts, setPosts] = useState([]);
 
-  const cat = useLocation().search
-
   useEffect(() => {
     const fetchData = async () => {
       try {
