@@ -17,7 +17,9 @@ pipeline {
         }
         stage('Prune'){
             steps{
-                sh 'docker system prune -a --volumes -f'
+                sh 'docker compose down --remove-orphans'
+                sh 'docker compose ps'
+                sh 'docker system prune -a'
             }
         }
         stage('Build'){
@@ -33,10 +35,4 @@ pipeline {
             }
         }
     }
-    // post {
-    //     always {
-    //         sh 'docker compose down --remove-orphans -v'
-    //         sh 'docker compose ps'
-    //     }
-    // }
 }
